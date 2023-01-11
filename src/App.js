@@ -1,23 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import HomePage from "./scenes/homePage";
+import LoginPage from "./scenes/loginPage";
+import ProfilePage from "./scenes/profilePage";
+import EditProfile from "./scenes/editProfile";
+import Chat from "./scenes/chatPage";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { themeSettings } from "./theme";
 
 function App() {
+  const mode = useSelector((state) => state.mode);
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const isAuth = Boolean(useSelector((state) => state.token));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <ToastContainer limit={1} position="bottom-left" />
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes>
+            <Route
+              path="/"
+              element={!isAuth ? <LoginPage /> : <Navigate to="/home" />}
+            />
+            <Route
+              path="/home"
+              element={isAuth ? <HomePage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/profile/:userId"
+              element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/editProfile/:userId"
+              element={isAuth ? <EditProfile /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/chat"
+              element={isAuth ? <Chat /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
   );
 }
