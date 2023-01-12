@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="app">
-      <ToastContainer limit={1} position="bottom-left" />
+      <ToastContainer limit={1} position="bottom-center" />
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />

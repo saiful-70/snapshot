@@ -249,16 +249,24 @@ const Form = () => {
           </Box>
 
           {/* BUTTONS */}
-          <Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
             <Button
-              fullWidth
+              // fullWidth
               type="submit"
+              // color="primary"
+              variant="contained"
               sx={{
                 m: "2rem 0",
-                p: "1rem",
-                backgroundColor: palette.primary.main,
-                color: palette.background.alt,
-                "&:hover": { color: palette.primary.main },
+                p: ".5rem 1rem",
+
+                // backgroundColor: palette.primary.main,
+                // color: palette.background.alt,
+                // "&:hover": { color: palette.primary.main },
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}

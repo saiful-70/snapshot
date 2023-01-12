@@ -36,8 +36,8 @@ const PostBar = ({
     const formData = new FormData();
     formData.append("userId", _id);
     // console.log(_id, postId);
+    const toastNotification = toast.loading("Deleting Post...");
     try {
-      const toastNotification = toast.loading("Deleting Post...");
       const response = await axios({
         method: "delete",
         url: `${process.env.REACT_APP_SERVER_URL}/posts/${postId}`,
@@ -61,7 +61,13 @@ const PostBar = ({
         throw response;
       }
     } catch (err) {
-      console.log(err.response.data.message);
+      toast.update(toastNotification, {
+        render: err.response.data.message,
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
+      console.log(err);
     }
   };
 
