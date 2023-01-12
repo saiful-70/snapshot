@@ -1,4 +1,5 @@
 import { DarkMode, LightMode, Message, Search } from "@mui/icons-material";
+import { toast } from "react-toastify";
 import {
   Avatar,
   Button,
@@ -90,6 +91,14 @@ const Navbar = () => {
     setSearchResult([]);
   };
 
+  const handleLogOut = () => {
+    dispatch(setLogout());
+    toast.success("Logged Out successfully", {
+      autoClose: 1500,
+      hideProgressBar: true,
+    });
+  };
+
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1rem">
@@ -174,7 +183,7 @@ const Navbar = () => {
           // color="error"
           // size="small"
           // sx={{ bgcolor: "errro.main" }}
-          onClick={() => dispatch(setLogout())}
+          onClick={handleLogOut}
           sx={{ fontSize: { xs: ".5rem", md: ".8rem" }, ml: ".5rem" }}
         >
           Logout
