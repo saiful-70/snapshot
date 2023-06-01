@@ -1,4 +1,4 @@
-# Snapshot Server
+# Snapshot
 
 A complete social media web application with one-to-one chat functionality.
 This is the frontend of [snapshot-server](https://github.com/saiful-70/snapshot-server).
